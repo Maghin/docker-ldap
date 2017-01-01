@@ -4,7 +4,8 @@ services:
 #=== OPENLDAP ===
   openldap:
     image: osixia/openldap:1.1.7
-    container_name: openldap
+    restart: always
+    hostname: "ldap.merhylstudio.org"
     environment:
       LDAP_LOG_LEVEL: "stats"
       LDAP_ORGANISATION: "MerhylStudio"
@@ -33,30 +34,31 @@ services:
     tty: true
     stdin_open: true
     volumes:
-      - openldap-ldap:/var/lib/ldap
-      - openldap-slapd.d:/etc/ldap/slapd.d
-      - openldap-certs:/container/service/slapd/assets/certs/
+      - ldap:/var/lib/ldap
+      - slapd.d:/etc/ldap/slapd.d
+      - certs:/container/service/slapd/assets/certs/
     ports:
       - "389:389"
       - "639:639"
-    hostname: "ldap.merhylstudio.org"
 
 #=== PHPLDAPADMIN ===
   phpldapadmin:
     image: osixia/phpldapadmin:latest
-    container_name: phpldapadmin
+    restart: always
     environment:
       PHPLDAPADMIN_LDAP_HOSTS: "openldap"
       PHPLDAPADMIN_HTTPS: "false"
     volumes:
-      - openldap-phpldapadmin:/var/www/phpldapadmin
+      - phpldapadmin:/var/www/phpldapadmin
     ports:
-      - "8000:80"
+      - "8001:80"
     depends_on:
       - openldap
+
+#=== VOLUMES ===
 volumes:
-  openldap-ldap:
-  openldap-slapd.d:
-  openldap-certs:
-  openldap-phpldapadmin:
+  ldap:
+  slapd.d:
+  certs:
+  phpldapadmin:
 
