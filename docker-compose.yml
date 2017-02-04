@@ -48,17 +48,7 @@ services:
     volumes:
       - ldap-phpldapadmin:/var/www/phpldapadmin
     ports:
-      - "8001:80"
+      - "8000:80"
     links:
       - openldap
 
-#=== VOLUMES ===
-volumes:
-  ldap:
-    driver: local
-  slapd.d:
-    driver: local
-  certs:
-    driver: local
-  phpldapadmin:
-    driver: local

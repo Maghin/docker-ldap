@@ -61,6 +61,7 @@ userPassword: iop
 dn: uid=billy,ou=users,dc=merhylstudio,dc=home
 objectClass: posixAccount
 objectClass: shadowAccount
+objectClass: posixAccount
 uid: billy
 sn: Billy
 givenName: Billy
