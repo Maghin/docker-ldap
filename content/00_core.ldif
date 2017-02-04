@@ -59,7 +59,7 @@ userPassword: iop
 ##
 
 dn: uid=billy,ou=users,dc=merhylstudio,dc=home
-objectClass: posixAccount
+objectClass: InetOrgPerson
 objectClass: shadowAccount
 objectClass: posixAccount
 uid: billy
