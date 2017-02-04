@@ -1,0 +1,78 @@
+##
+# first setup the basic organizational units
+##
+
+# start with the people's group
+# all objects will be place inside this tree
+dn: ou=users,dc=merhylstudio,dc=home
+objectClass: organizationalUnit
+ou: users
+
+# all unix groups will be placed here
+dn: ou=groups,dc=merhylstudio,dc=home
+objectClass: organizationalUnit
+ou: groups
+
+
+##
+# Posix groups
+##
+
+# first some basic group
+#
+dn: cn=users,ou=groups,dc=merhylstudio,dc=home
+objectClass: posixGroup
+cn: users
+gidNumber: 4200
+
+# now start with the object specific group stuff
+#
+dn: cn=admin,ou=groups,dc=merhylstudio,dc=home
+objectClass: posixGroup
+cn: admin
+gidNumber: 4201
+
+dn: cn=customer,ou=groups,dc=merhylstudio,dc=home
+objectClass: posixGroup
+cn: customer
+gidNumber: 4202
+
+
+##
+# Daemon and worker user: manager
+##
+
+# Manager user.
+# this user is like the admin user, but a secondary.
+# it can be deleted if necessary
+#
+dn: cn=manager,dc=merhylstudio,dc=home
+objectClass: simpleSecurityObject
+objectClass: organizationalRole
+cn: manager
+description: LDAP manager
+userPassword: iop
+
+
+##
+# some ldap user for testing and stuff
+##
+
+dn: uid=billy,ou=users,dc=merhylstudio,dc=home
+objectClass: posixAccount
+objectClass: shadowAccount
+uid: billy
+sn: Billy
+givenName: Billy
+cn: Billy
+displayName: Billy
+uidNumber: 3001
+gidNumber: 4202
+userPassword: iop
+loginShell: /bin/bash
+homeDirectory: /home/billy
+shadowExpire: -1
+shadowInactive: -1
+o: merhylstudio
+title: Billy Test Account
+
