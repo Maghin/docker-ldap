@@ -18,20 +18,22 @@ ou: groups
 # Posix groups
 ##
 
-# first some basic group
-#
-dn: cn=users,ou=groups,dc=merhylstudio,dc=home
-objectClass: posixGroup
-cn: users
-gidNumber: 4200
-
-# now start with the object specific group stuff
+# admin group
 #
 dn: cn=admin,ou=groups,dc=merhylstudio,dc=home
 objectClass: posixGroup
 cn: admin
+gidNumber: 4200
+
+# dev group
+#
+dn: cn=dev,ou=groups,dc=merhylstudio,dc=home
+objectClass: posixGroup
+cn: dev
 gidNumber: 4201
 
+# customer group
+#
 dn: cn=customer,ou=groups,dc=merhylstudio,dc=home
 objectClass: posixGroup
 cn: customer
@@ -51,11 +53,36 @@ objectClass: simpleSecurityObject
 objectClass: organizationalRole
 cn: manager
 description: LDAP manager
-userPassword: iop
+userPassword: manager
 
 
 ##
-# some ldap user for testing and stuff
+# maghin principal user
+# admin group
+##
+
+dn: uid=maghin,ou=users,dc=merhylstudio,dc=home
+objectClass: InetOrgPerson
+objectClass: shadowAccount
+objectClass: posixAccount
+uid: maghin
+sn: Maghin
+givenName: Maghin
+cn: Maghin
+displayName: Maghin
+mail: maghin@merhylstudio.org
+uidNumber: 3000
+gidNumber: 4200
+userPassword: iop
+loginShell: /bin/bash
+homeDirectory: /home/maghin
+shadowExpire: -1
+shadowInactive: -1
+title: Maghin Principal Account
+
+##
+# billy user for testing and stuff
+# dev group
 ##
 
 dn: uid=billy,ou=users,dc=merhylstudio,dc=home
@@ -67,13 +94,13 @@ sn: Billy
 givenName: Billy
 cn: Billy
 displayName: Billy
+mail: billy@merhylstudio.home
 uidNumber: 3001
-gidNumber: 4202
+gidNumber: 4201
 userPassword: iop
 loginShell: /bin/bash
 homeDirectory: /home/billy
 shadowExpire: -1
 shadowInactive: -1
-o: merhylstudio
 title: Billy Test Account
 
